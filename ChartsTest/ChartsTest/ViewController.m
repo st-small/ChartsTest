@@ -18,9 +18,9 @@
 @property (nonatomic, strong) IBOutlet UITextField *sliderTextY;
 
 @property (strong, nonatomic) NSArray* parties;
-@property (strong, nonatomic) NSArray* values;
 @property (nonatomic, strong) IBOutlet UIButton *optionsButton;
 @property (nonatomic, strong) IBOutlet NSArray *options;
+@property (nonatomic, strong) IBOutlet NSArray *values;
 
 @property (nonatomic, assign) BOOL shouldHideData;
 
@@ -34,22 +34,12 @@
     self.title = @"Pie Bar Chart";
     
     self.parties = @[
-                @"Party A", @"Party B", @"Party C", @"Party D", @"Party E", @"Party F",
-                @"Party G", @"Party H", @"Party I", @"Party J", @"Party K", @"Party L",
-                @"Party M", @"Party N", @"Party O", @"Party P", @"Party Q", @"Party R",
-                @"Party S", @"Party T", @"Party U", @"Party V", @"Party W", @"Party X",
-                @"Party Y", @"Party Z"
-                ];
+                @"Путин В.В.", @"Жириновский В.В.", @"Медведев Д.А.", @"Зюганов Г.А."];
     
-    self.values = @[
-                    [NSNumber numberWithDouble:100.0],
-                    [NSNumber numberWithDouble:200.0],
-                    [NSNumber numberWithDouble:300.0],
-                    [NSNumber numberWithDouble:400.0],
-                    [NSNumber numberWithDouble:500.0],
-                    [NSNumber numberWithDouble:600.0],
-                    [NSNumber numberWithDouble:700.0],
-                    [NSNumber numberWithDouble:800.0]];
+    self.values = @[[NSNumber numberWithDouble:25],
+                    [NSNumber numberWithDouble:15],
+                    [NSNumber numberWithDouble:30],
+                    [NSNumber numberWithDouble:30]];
     
     self.options = @[
                      @{@"key": @"toggleValues", @"label": @"Toggle Y-Values"},
@@ -71,13 +61,13 @@
     self.chartView.delegate = self;
     
     ChartLegend *l = self.chartView.legend;
-    l.horizontalAlignment = ChartLegendHorizontalAlignmentRight;
+    l.horizontalAlignment = ChartLegendHorizontalAlignmentCenter;
     l.verticalAlignment = ChartLegendVerticalAlignmentTop;
-    l.orientation = ChartLegendOrientationVertical;
+    l.orientation = ChartLegendOrientationHorizontal;
     l.drawInside = NO;
     l.xEntrySpace = 7.0;
-    l.yEntrySpace = 0.0;
-    l.yOffset = 0.0;
+    l.yEntrySpace = 5.0;
+    l.yOffset = 10.0;
     
     // entry label styling
     self.chartView.entryLabelColor = UIColor.whiteColor;
@@ -145,15 +135,15 @@
 }
 
 - (void)setDataCount:(int)count range:(double)range {
-    double mult = range;
     
     NSMutableArray *values = [[NSMutableArray alloc] init];
     
     for (int i = 0; i < count; i++) {
         [values addObject:[[PieChartDataEntry alloc] initWithValue:[self.values[i] doubleValue] label:self.parties[i % self.parties.count] icon: [UIImage imageNamed:@"icon"]]];
+        NSLog(@"%@", values[i]);
     }
     
-    PieChartDataSet *dataSet = [[PieChartDataSet alloc] initWithValues:values label:@"Election Results"];
+    PieChartDataSet *dataSet = [[PieChartDataSet alloc] initWithValues:values label:@"www.somewhere1.com"];
     
     dataSet.drawIconsEnabled = NO;
     
