@@ -6,10 +6,10 @@
 //  Copyright © 2017 Stanly Shiyanovskiy. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "SiSPieChartViewController.h"
 #import "Charts-Swift.h"
 
-@interface ViewController () <ChartViewDelegate>
+@interface SiSPieChartViewController () <ChartViewDelegate>
 
 @property (nonatomic, strong) IBOutlet PieChartView *chartView;
 @property (nonatomic, strong) IBOutlet UISlider *sliderX;
@@ -26,7 +26,7 @@
 
 @end
 
-@implementation ViewController
+@implementation SiSPieChartViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
